@@ -244,23 +244,50 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen p-6 space-y-4">
-      <h1 className="text-2xl font-bold">Face Emotion Detection</h1>
+  <main className="min-h-screen bg-gray-200 p-6">
+    <div className="max-w-6xl mx-auto space-y-6">
+      
+      <header className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold tracking-tight">
+          Face Emotion AI
+        </h1>
 
-      <div>
-        สถานะ: {status} <br />
-        Emotion: <b>{emotion}</b> ({(conf * 100).toFixed(1)}%)
+        <button
+          onClick={startCamera}
+          className="px-5 py-2 bg-black text-white rounded-lg hover:opacity-80 transition"
+        >
+          Start Camera
+        </button>
+      </header>
+
+      <div className="grid grid-cols-3 gap-4">
+        <div className="bg-white rounded-xl p-4 shadow">
+          <p className="text-xs text-gray-500">STATUS</p>
+          <p className="font-semibold">{status}</p>
+        </div>
+
+        <div className="bg-white rounded-xl p-4 shadow">
+          <p className="text-xs text-gray-500">EMOTION</p>
+          <p className="font-semibold text-blue-600">{emotion}</p>
+        </div>
+
+        <div className="bg-white rounded-xl p-4 shadow">
+          <p className="text-xs text-gray-500">CONFIDENCE</p>
+          <p className="font-semibold">
+            {(conf * 100).toFixed(1)}%
+          </p>
+        </div>
       </div>
 
-      <button
-        onClick={startCamera}
-        className="px-4 py-2 bg-black text-white rounded"
-      >
-        Start Camera
-      </button>
+      <div className="bg-white rounded-2xl p-4 shadow">
+        <canvas
+          ref={canvasRef}
+          className="w-full rounded-xl border"
+        />
+      </div>
 
       <video ref={videoRef} className="hidden" playsInline />
-      <canvas ref={canvasRef} className="w-full max-w-3xl border rounded" />
-    </main>
+    </div>
+  </main>
   );
 }
